@@ -1,14 +1,13 @@
 const mongoose = require('mongoose');
 
-const todoSchema = mongoose.Schema({
- name: String,
- assignedTo: [String],
- priority: Number,
- done: Boolean,
- dateDue: Date,
-});
+const usersSchema = mongoose.Schema({
+ firstname: String,
+ username: String,
+ password: String,
+ token: String,
+ 
+ });
 
-const Todo = mongoose.model('todos', todoSchema);
+const User = mongoose.model('users', usersSchema);
 
-module.exports = Todo;
-
+module.exports = User;
