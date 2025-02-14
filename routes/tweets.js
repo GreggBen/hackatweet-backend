@@ -21,8 +21,10 @@ console.log(data);
 
 });
 /* Récuperer tout les tweets crée. */
-router.get('/alltweet', function(req, res, next) {
-    Tweet.find().then(data =>{
+router.get('/alltweet',function(req, res, next) {
+    Tweet.find()
+    .populate('author')
+    .then(data =>{
 console.log(data);
 
 res.json({
@@ -33,6 +35,24 @@ res.json({
     })
 
 })
+
+
+
+//on va modifier le tweet avec l'id de la collection tweet
+router.put('/likedtweet', function(req, res){
+    Tweet.findById(req.body.id).then(data=>{
+       if(data){
+          Tweet.updateOne({_id:data._id},{$push:{isLiked:data._id}})//dans le schéma y'a un tableau de clé etrangere et a chaque fois que l'ont modifie le tweet on rajoute une clé etrangere dans le tab isLiked 
+          .then((data)=>{
+           res.json({result:true,data})
+          })
+       }
+      
+                 
+       })
+   
+    })
+
 
 
 

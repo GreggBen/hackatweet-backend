@@ -38,6 +38,7 @@ else{
 });
 
 router.post('/signin', function(req, res) {
+console.log(req.body);
 
   User.findOne({ username: req.body.username }).then(data => {
     console.log(req.body.password, data.password);
